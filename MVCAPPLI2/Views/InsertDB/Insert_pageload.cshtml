@@ -1,0 +1,109 @@
+﻿@model MVCAPPLI2.Models.InsertCls
+@{
+    ViewBag.Title = "Insert_pageload";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>User Registration</h2>
+<div>
+    @using (Html.BeginForm("Insert_click", "InsertDB", FormMethod.Post,
+        new { enctype = "multipart/form-data" }))
+    {
+        <div>
+            <label>Name :</label>
+        </div>
+        <div>
+            @Html.TextBoxFor(m => m.Name)
+            @Html.ValidationMessageFor(m => m.Name)
+        </div>
+
+        <div>
+            <label>Age :</label>
+        </div>
+        <div>
+            @Html.TextBoxFor(m => m.Age)
+            @Html.ValidationMessageFor(m => m.Age)
+        </div>
+
+        <div>
+            <label>Address :</label>
+        </div>
+        <div>
+            @Html.TextBoxFor(m => m.Address)
+            @Html.ValidationMessageFor(m => m.Address)
+        </div>
+
+        <div>
+            <label>Email :</label>
+        </div>
+        <div>
+            @Html.TextBoxFor(m => m.Email)
+            @Html.ValidationMessageFor(m => m.Email)
+        </div>
+
+        <div>
+            <label>Photo :</label>
+        </div>
+        <div>
+            @Html.TextBox("file", "", new { Type = "file" })
+        </div>
+
+        <div>
+            <label>Gender :</label>
+        </div>
+        <div>
+            Male
+            @Html.RadioButtonFor(m => m.Gender, "Male")
+            Female
+            @Html.RadioButtonFor(m => m.Gender, "Female")
+        </div>
+
+        <div>
+            <label>State :</label>
+        </div>
+        <div>
+            @Html.DropDownList("ddlstate", (SelectList)ViewBag.Selstates, "--Select--",
+           new { @class = "form-control" })
+        </div>
+
+        <div>
+            <label>Qualification :</label>
+        </div>
+        <div>
+            @foreach (var item in Model.MyfavoriteQual)
+            {
+                <label>
+                    <input type="checkbox" value="@item.Value" checked="@item.IsChecked"
+                           name="selectedQual" id="@item.Value" />@Html.Raw(item.Text)
+                    </label>
+                }
+        </div>
+        <div>
+            <label>Username :</label>
+        </div>
+        <div>
+            @Html.TextBoxFor(m => m.Username)
+            @Html.ValidationMessageFor(m => m.Username)
+        </div>
+
+        <div>
+            <label>Password :</label>
+        </div>
+        <div>
+            @Html.PasswordFor(m => m.Password)
+        </div>
+
+        <div>
+            <label>Confirm Password :</label>
+        </div>
+        <div>
+            @Html.PasswordFor(m => m.CPassword)
+            @Html.ValidationMessageFor(m=>m.CPassword)
+        </div>
+        <div>
+            <input type="submit" value="Insert"/>
+            @Html.DisplayFor(m=>m.msg)
+        </div>
+    }
+</div>
+
